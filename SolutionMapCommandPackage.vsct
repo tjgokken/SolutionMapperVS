@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Extern href="stdidcmd.h"/>
+	<Extern href="vsshlids.h"/>
+
+	<Commands package="guidProjectStructureExporterPkg">
+		<Groups>
+			<Group guid="guidProjectStructureExporterCmdSet" id="MyMenuGroup" priority="0x0600">
+				<Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE"/>
+			</Group>
+		</Groups>
+
+		<Buttons>
+			<Button guid="guidProjectStructureExporterCmdSet" id="cmdidExportProjectStructure" priority="0x0100" type="Button">
+				<Parent guid="guidProjectStructureExporterCmdSet" id="MyMenuGroup" />
+				<Strings>
+					<ButtonText>Export Project Structure</ButtonText>
+				</Strings>
+			</Button>
+		</Buttons>
+	</Commands>
+
+	<Symbols>
+		<GuidSymbol name="guidProjectStructureExporterPkg" value="{2b02fa54-dc7c-4035-9f16-7d45ef2f8d17}">
+		</GuidSymbol>
+
+		<GuidSymbol name="guidProjectStructureExporterCmdSet" value="{2583744c-a058-4a98-83a3-27427d0f4cbc}">
+			<IDSymbol name="MyMenuGroup" value="0x1020" />
+			<IDSymbol name="cmdidExportProjectStructure" value="0x0100" />
+		</GuidSymbol>
+	</Symbols>
+</CommandTable>
