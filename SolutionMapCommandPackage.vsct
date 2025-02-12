@@ -3,30 +3,30 @@
 	<Extern href="stdidcmd.h"/>
 	<Extern href="vsshlids.h"/>
 
-	<Commands package="guidProjectStructureExporterPkg">
+	<Commands package="guidSolutionStructureExporterPkg">
 		<Groups>
-			<Group guid="guidProjectStructureExporterCmdSet" id="MyMenuGroup" priority="0x0600">
+			<Group guid="guidSolutionStructureExporterCmdSet" id="MyMenuGroup" priority="0x0600">
 				<Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE"/>
 			</Group>
 		</Groups>
 
 		<Buttons>
-			<Button guid="guidProjectStructureExporterCmdSet" id="cmdidExportProjectStructure" priority="0x0100" type="Button">
-				<Parent guid="guidProjectStructureExporterCmdSet" id="MyMenuGroup" />
+			<Button guid="guidSolutionStructureExporterCmdSet" id="cmdidExportSolutionStructure" priority="0x0100" type="Button">
+				<Parent guid="guidSolutionStructureExporterCmdSet" id="MyMenuGroup" />
 				<Strings>
-					<ButtonText>Export Project Structure</ButtonText>
+					<ButtonText>Export Solution Structure</ButtonText>
 				</Strings>
 			</Button>
 		</Buttons>
 	</Commands>
 
 	<Symbols>
-		<GuidSymbol name="guidProjectStructureExporterPkg" value="{2b02fa54-dc7c-4035-9f16-7d45ef2f8d17}">
+		<GuidSymbol name="guidSolutionStructureExporterPkg" value="{2b02fa54-dc7c-4035-9f16-7d45ef2f8d17}">
 		</GuidSymbol>
 
-		<GuidSymbol name="guidProjectStructureExporterCmdSet" value="{2583744c-a058-4a98-83a3-27427d0f4cbc}">
+		<GuidSymbol name="guidSolutionStructureExporterCmdSet" value="{2583744c-a058-4a98-83a3-27427d0f4cbc}">
 			<IDSymbol name="MyMenuGroup" value="0x1020" />
-			<IDSymbol name="cmdidExportProjectStructure" value="0x0100" />
+			<IDSymbol name="cmdidExportSolutionStructure" value="0x0100" />
 		</GuidSymbol>
 	</Symbols>
 </CommandTable>

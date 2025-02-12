@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
 
-namespace ProjectStructureExporter
+namespace SolutionStructureExporter
 {
     /// <summary>
     ///     Command handler
@@ -66,7 +66,7 @@ namespace ProjectStructureExporter
         /// <param name="package">Owner package, not null.</param>
         public static async Task InitializeAsync(AsyncPackage package)
         {
-            // Switch to the main thread - the call to AddCommand in ProjectStructureCommand's constructor requires
+            // Switch to the main thread - the call to AddCommand in SolutionStructureCommand's constructor requires
             // the UI thread.
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
@@ -79,8 +79,6 @@ namespace ProjectStructureExporter
         ///     See the constructor to see how the menu item is associated with this function using
         ///     OleMenuCommandService service and MenuCommand class.
         /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event args.</param>
         private async Task ExecuteAsync()
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -95,23 +93,23 @@ namespace ProjectStructureExporter
             var solutionDir = Path.GetDirectoryName(dte.Solution.FullName);
             var solutionName = Path.GetFileNameWithoutExtension(dte.Solution.FullName);
 
-            var format = PromptForFormat(out var cancelled);
+            var format = PromptForFormat(out var cancelled, out var includeCodeDetails);
             if (cancelled)
                 return; // User cancelled
 
-            var structure = new SolutionMapGenerator().GenerateStructure(solutionDir, format);
+            var structure = new SolutionMapGenerator(includeCodeDetails).GenerateStructure(solutionDir, format);
 
             using (var saveFileDialog = new SaveFileDialog())
             {
                 var extension = GetFileExtension(format);
-                saveFileDialog.FileName = $"{solutionName}-project-structure{extension}";
+                saveFileDialog.FileName = $"{solutionName}-solution-structure{extension}";
                 saveFileDialog.Filter = GetFileFilter(format);
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     try
                     {
                         File.WriteAllText(saveFileDialog.FileName, structure);
-                        ShowMessage($"Project structure has been exported to: {saveFileDialog.FileName}");
+                        ShowMessage($"Solution structure has been exported to: {saveFileDialog.FileName}");
                     }
                     catch (Exception ex)
                     {
@@ -120,18 +118,18 @@ namespace ProjectStructureExporter
             }
         }
 
-        private SolutionMapGenerator.OutputFormat PromptForFormat(out bool cancelled)
+        private SolutionMapGenerator.OutputFormat PromptForFormat(out bool cancelled, out bool includeCodeDetails)
         {
             var form = new Form
             {
                 Width = 400,
-                Height = 220,
+                Height = 240,
                 Text = "Select Output Format",
                 StartPosition = FormStartPosition.CenterScreen,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 MaximizeBox = false,
                 MinimizeBox = false,
-                Font = new Font("Segoe UI", 10)
+                Font = new System.Drawing.Font("Segoe UI", 10)
             };
 
             var label = new Label
@@ -143,12 +141,20 @@ namespace ProjectStructureExporter
 
             var combo = new ComboBox
             {
-                Location = new Point(12, 40),
+                Location = new Point(12, 50),
                 Width = 360,
                 DropDownStyle = ComboBoxStyle.DropDownList
             };
             combo.Items.AddRange(Enum.GetNames(typeof(SolutionMapGenerator.OutputFormat)));
             combo.SelectedIndex = 0;
+
+            var detailsCheckbox = new CheckBox
+            {
+                Text = "Include code classes/methods",
+                Location = new Point(12, 90),
+                Width = 360,
+                AutoSize = true
+            };
 
             var button = new Button
             {
@@ -156,7 +162,7 @@ namespace ProjectStructureExporter
                 DialogResult = DialogResult.OK,
                 Width = 88,
                 Height = 37,
-                Location = new Point(180, 100)
+                Location = new Point(180, 130)
             };
 
             var cancelButton = new Button
@@ -165,20 +171,21 @@ namespace ProjectStructureExporter
                 DialogResult = DialogResult.Cancel,
                 Width = 88,
                 Height = 37,
-                Location = new Point(284, 100)
+                Location = new Point(284, 130)
             };
 
-            form.Controls.AddRange(new Control[] { combo, button, cancelButton, label });
+            form.Controls.AddRange(new Control[] { combo, button, cancelButton, label, detailsCheckbox });
             form.AcceptButton = button;
             form.CancelButton = cancelButton;
-            form.FormClosing += (s, e) =>
-            {
+            form.FormClosing += (s, e) => {
                 if (form.DialogResult == DialogResult.None)
                     form.DialogResult = DialogResult.Cancel;
             };
 
             var result = form.ShowDialog();
             cancelled = result == DialogResult.Cancel;
+            includeCodeDetails = detailsCheckbox.Checked;
+
             return result == DialogResult.OK
                 ? (SolutionMapGenerator.OutputFormat)Enum.Parse(typeof(SolutionMapGenerator.OutputFormat), combo.SelectedItem.ToString())
                 : SolutionMapGenerator.OutputFormat.Text;
@@ -227,7 +234,7 @@ namespace ProjectStructureExporter
             VsShellUtilities.ShowMessageBox(
                 package,
                 message,
-                "Project Structure Exporter",
+                "Solution Structure Exporter",
                 OLEMSGICON.OLEMSGICON_INFO,
                 OLEMSGBUTTON.OLEMSGBUTTON_OK,
                 OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
@@ -238,7 +245,7 @@ namespace ProjectStructureExporter
             VsShellUtilities.ShowMessageBox(
                 package,
                 message,
-                "Project Structure Exporter",
+                "Solution Structure Exporter",
                 OLEMSGICON.OLEMSGICON_CRITICAL,
                 OLEMSGBUTTON.OLEMSGBUTTON_OK,
                 OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);

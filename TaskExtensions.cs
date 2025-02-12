@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.VisualStudio.Threading;
 
-namespace ProjectStructureExporter
+namespace SolutionStructureExporter
 {
     public static class TaskExtensions
     {

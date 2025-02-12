@@ -13,7 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
-namespace ProjectStructureExporter
+namespace SolutionStructureExporter
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -39,7 +39,7 @@ namespace ProjectStructureExporter
     public sealed class SolutionMapCommandPackage : AsyncPackage
     {
         /// <summary>
-        /// ProjectStructureCommandPackage GUID string.
+        /// SolutionStructureCommandPackage GUID string.
         /// </summary>
         public const string PackageGuidString = "2b02fa54-dc7c-4035-9f16-7d45ef2f8d17";
 

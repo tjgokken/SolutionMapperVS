@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="ProjectStructureExporter.30026c8f-c404-4dcc-bdbf-5a14e3008eba" Version="1.0" Language="en-US" Publisher="TJ Gokken" />
-    <DisplayName>ProjectStructureExporter</DisplayName>
+    <Identity Id="SolutionStructureExporter.30026c8f-c404-4dcc-bdbf-5a14e3008eba" Version="1.0" Language="en-US" Publisher="TJ Gokken" />
+    <DisplayName>SolutionStructureExporter</DisplayName>
     <Description>Empty VSIX Project.</Description>
   </Metadata>
   <Installation>
