@@ -27,11 +27,8 @@ Visual Studio extension to export your solution structure in multiple formats.
 5. Optional: Check "Include code details" to show classes and methods
 6. Click OK and choose where to save the file
 
-## Example Outputs
-[Show examples of each format]
-
 ## Contributing
-Contributions welcome! Please read CONTRIBUTING.md first.
+Contributions welcome!
 
 ## License
 MIT License - see LICENSE.txt
