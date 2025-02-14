@@ -13,7 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
-namespace SolutionStructureExporter
+namespace SolutionMapper
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -39,7 +39,7 @@ namespace SolutionStructureExporter
     public sealed class SolutionMapCommandPackage : AsyncPackage
     {
         /// <summary>
-        /// SolutionStructureCommandPackage GUID string.
+        /// SolutionMapperCommandPackage GUID string.
         /// </summary>
         public const string PackageGuidString = "2b02fa54-dc7c-4035-9f16-7d45ef2f8d17";
 
@@ -68,7 +68,7 @@ namespace SolutionStructureExporter
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            await SolutionMapCommand.InitializeAsync(this);
+            await SolutionMapperCommand.InitializeAsync(this);
         }
 
         #endregion

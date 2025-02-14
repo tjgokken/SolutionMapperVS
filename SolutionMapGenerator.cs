@@ -7,7 +7,7 @@ using System.Text.Json;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SolutionStructureExporter
+namespace SolutionMapper
 {
     internal class SolutionMapGenerator
     {

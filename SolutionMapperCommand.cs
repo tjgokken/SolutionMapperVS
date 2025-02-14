@@ -8,12 +8,12 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
 
-namespace SolutionStructureExporter
+namespace SolutionMapper
 {
     /// <summary>
     ///     Command handler
     /// </summary>
-    internal sealed class SolutionMapCommand
+    internal sealed class SolutionMapperCommand
     {
         /// <summary>
         ///     Command ID.
@@ -31,12 +31,12 @@ namespace SolutionStructureExporter
         private readonly AsyncPackage package;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SolutionMapCommand" /> class.
+        ///     Initializes a new instance of the <see cref="SolutionMapperCommand" /> class.
         ///     Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private SolutionMapCommand(AsyncPackage package, OleMenuCommandService commandService)
+        private SolutionMapperCommand(AsyncPackage package, OleMenuCommandService commandService)
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
@@ -53,7 +53,7 @@ namespace SolutionStructureExporter
         /// <summary>
         ///     Gets the instance of the command.
         /// </summary>
-        public static SolutionMapCommand Instance { get; private set; }
+        public static SolutionMapperCommand Instance { get; private set; }
 
         /// <summary>
         ///     Gets the service provider from the owner package.
@@ -71,7 +71,7 @@ namespace SolutionStructureExporter
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
             var commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
-            Instance = new SolutionMapCommand(package, commandService);
+            Instance = new SolutionMapperCommand(package, commandService);
         }
 
         /// <summary>
