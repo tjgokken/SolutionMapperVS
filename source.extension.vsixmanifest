@@ -1,22 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="SolutionMapper.30026c8f-c404-4dcc-bdbf-5a14e3008eba" Version="1.0" Language="en-US" Publisher="TJ Gokken" />
+        <Identity Id="SolutionMapper.30026c8f-c404-4dcc-bdbf-5a14e3008eba" Version="1.1" Language="en-US" Publisher="TJ Gokken" />
         <DisplayName>SolutionMapper</DisplayName>
-        <Description xml:space="preserve">Export your Visual Studio solution structure in multiple formats including text, markdown, HTML, JSON, YAML, and Mermaid diagrams. Perfect for documentation, onboarding, and architecture reviews.
+        <Description xml:space="preserve">Export your Visual Studio solution structure in multiple formats - perfect for documentation, onboarding, and architecture reviews.
 
-Features:
-- Multiple export formats
-- Optional code details (classes/methods)
-- Customizable file/folder exclusions
-- Interactive HTML view
-- Mermaid diagram support for GitHub/GitLab</Description>
-        <MoreInfo>https://github.com/tjgokken/SolutionMapperVS</MoreInfo>
+NEW in v1.1: Excludes .git, .svn, .hg, .bzr, and _darcs folders automatically for dramatically smaller, cleaner exports.
+
+Key Features:
+- Multiple export formats: Text, Markdown, HTML, JSON, YAML, and Mermaid diagrams
+- Code analysis: Optional inclusion of classes and methods from C# files
+- Interactive HTML: Collapsible tree view perfect for presentations
+- Mermaid diagrams: GitHub/GitLab compatible flowcharts
+- Smart filtering: Automatically excludes build artifacts and version control folders
+
+Perfect for creating project documentation, onboarding new developers, architecture reviews, and technical presentations.
+
+How to Use:
+1. Open solution in Visual Studio
+2. Go to Tools -> SolutionMapper
+3. Choose export format
+4. Optional: Include code details
+5. Save your documentation
+
+Compatible with Visual Studio 2022 (Community, Professional, Enterprise)</Description>
+        <MoreInfo>https://github.com/tjgokken/SolutionMapVS</MoreInfo>
         <License>LICENSE.txt</License>
         <GettingStartedGuide>README.md</GettingStartedGuide>
         <Icon>Resources\icon.png</Icon>
         <PreviewImage>SolutionMapperScreenshot.png</PreviewImage>
-        <Tags>solution, documentation, structure, markdown, mermaid, diagram, code-visualization, project-structure</Tags>
+        <Tags>solution, documentation, structure, markdown, mermaid, diagram, code-visualization, project-structure, export, architecture, onboarding, github, gitlab, yaml, json, html</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">

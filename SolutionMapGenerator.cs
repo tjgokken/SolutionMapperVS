@@ -24,7 +24,7 @@ namespace SolutionMapper
         private readonly string[] _excludedExtensions = { ".user", ".suo", ".csproj", ".json", ".sln" };
 
         private readonly string[] _excludedFolders =
-            { ".vs", "bin", "obj", "packages", "node_modules", "wwwroot", "properties" };
+            { ".vs", "bin", "obj", "packages", "node_modules", "wwwroot", "properties", ".git", ".svn", ".hg", ".bzr", "_darcs" };
 
         private readonly bool _includeCodeDetails;
         private readonly StringBuilder _stringBuilder = new StringBuilder();

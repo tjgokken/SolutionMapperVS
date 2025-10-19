@@ -62,6 +62,8 @@
     <Content Include="SolutionMapperScreenshot.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <None Include="app.config" />
+    <None Include="Directory.Build.props" />
     <None Include="Key.snk" />
     <Content Include="README.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

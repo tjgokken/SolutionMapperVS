@@ -1,0 +1,32 @@
+<Project>
+  <PropertyGroup>
+    <!-- Suppress assembly version conflict warnings for VS extensions -->
+    <!-- MSB3277: Assembly version conflicts are common in VS extensions due to the complex 
+         dependency chain between VS SDK, Roslyn, and NuGet packages. These conflicts are 
+         resolved at runtime by the VS host process and don't affect functionality. -->
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsNotAsErrors>MSB3277</WarningsNotAsErrors>
+    
+    <!-- Additional warning suppressions for VS SDK -->
+    <NoWarn>$(NoWarn);MSB3277;CS0436;NU1701</NoWarn>
+    
+    <!-- Justifications for each suppressed warning:
+         
+         MSB3277: Found conflicts between different versions of assembly references
+         - Common in VS extensions due to VS SDK containing different versions of 
+           Microsoft.CodeAnalysis, System.Collections.Immutable, etc. than NuGet packages
+         - Runtime binding redirects and VS assembly resolution handle these conflicts
+         - These warnings are informational and don't indicate actual runtime issues
+         
+         CS0436: Type conflicts with imported type  
+         - Occurs when VS SDK and extension reference similar types from different assemblies
+         - VS extensions run in isolated AppDomains where type conflicts are resolved
+         - Common with Microsoft.VisualStudio.* assemblies that exist in multiple versions
+         
+         NU1701: Package restored using .NET Framework instead of target framework
+         - VS extensions target .NET Framework 4.8 but some packages are .NET Standard
+         - .NET Framework can consume .NET Standard packages without issues
+         - This is expected behavior for VS extension development -->
+  </PropertyGroup>
+</Project>
